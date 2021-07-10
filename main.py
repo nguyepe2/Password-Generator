@@ -4,7 +4,8 @@ import random
 
 def password_generator(name):
     requirements = get_user_input()
-    print(generate_password(requirements))
+    password = generate_password(requirements)
+    output_password(password)
 
 
 def get_user_input():
@@ -56,6 +57,12 @@ def generate_password(requirements):
 
     return password
 
+
+# create or append the password to a file
+def output_password(password):
+    fo = open("passwords.txt", "a")
+    fo.write(password + '\n')
+    fo.close()
 
 if __name__ == '__main__':
     password_generator('PyCharm')
