@@ -62,10 +62,10 @@ def get_uppercase(caps, upper_case):
 
 # get the digits for the password
 def get_digits(numbers, digit_string):
-    # initialize a list to store the uppercase letters
+    # initialize a list to store the digits
     selected_digits = []
 
-    # randomly select uppercase letters to use in the password
+    # randomly select digits to use in the password
     for i in range(numbers):
         char = random.randint(0, len(digit_string) - 1)
         selected_digits.append(digit_string[char])
@@ -75,10 +75,10 @@ def get_digits(numbers, digit_string):
 
 # get the symbols for the password
 def get_symbols(symbols, symbol_list):
-    # initialize a list to store the uppercase letters
+    # initialize a list to store the symbols
     selected_symbols = []
 
-    # randomly select uppercase letters to use in the password
+    # randomly select symbols to use in the password
     for i in range(symbols):
         char = random.randint(0, len(symbol_list) - 1)
         selected_symbols.append(symbol_list[char])
@@ -88,10 +88,10 @@ def get_symbols(symbols, symbol_list):
 
 # get the lowercase letters for the password
 def get_lowercase(lowers, lower_case):
-    # initialize a list to store the uppercase letters
+    # initialize a list to store the lowercase letters
     selected_lower_case = []
 
-    # randomly select uppercase letters to use in the password
+    # randomly select lowercase letters to use in the password
     for i in range(lowers):
         char = random.randint(0, len(lower_case) - 1)
         selected_lower_case.append(lower_case[char])
