@@ -1,23 +1,87 @@
 import string
 import random
+import tkinter
 
 
-def password_generator(name):
+# start of tkinter
+
+
+top = tkinter.Tk()
+
+
+# create text label for password length input field
+length_label = tkinter.Label(top, text = "Password Length")
+length_label.pack()
+
+# create input field for length
+length_entry = tkinter.Entry(top)
+length_entry.pack()
+length_entry.insert(0, 20)
+
+# create text label for number length input field
+number_label = tkinter.Label(top, text = "Amount of numbers")
+number_label.pack()
+
+# create input field for number length
+number_entry = tkinter.Entry(top)
+number_entry.pack()
+number_entry.insert(0, 2)
+
+
+# create text label for symbol length input field
+symbol_label = tkinter.Label(top, text = "Amount of symbols")
+symbol_label.pack()
+
+# create input field for symbol length
+symbol_entry = tkinter.Entry(top)
+symbol_entry.pack()
+symbol_entry.insert(0, 2)
+
+
+# create text label for caps length input field
+caps_label = tkinter.Label(top, text = "Amount of capitals")
+caps_label.pack()
+
+# create input field for caps length
+caps_entry = tkinter.Entry(top)
+caps_entry.pack()
+caps_entry.insert(0, 2)
+
+def password_generator():
     requirements = get_user_input()
     password = generate_password(requirements)
     output_password(password)
 
 
+
 def get_user_input():
     # get the requirements of the password
-    length = int(input("How long should the password be?\n"))
-    numbers = int(input("How many numbers should there be?\n"))
-    symbols = int(input("How many symbols should there be?\n"))
-    caps = int(input("How many capital letters should there be?\n"))
+    length = int(length_entry.get())
+
+    numbers = int(number_entry.get())
+
+    symbols = int(symbol_entry.get())
+
+    caps = int(caps_entry.get())
+
     lowers = length - numbers - symbols - caps
 
     requirements = [length, numbers, symbols, caps, lowers]
+
     return requirements
+
+
+start = tkinter.Button(top, text="Run", command=password_generator)
+start.pack()
+
+
+copied_label = tkinter.Label(top, text="")
+copied_label.pack()
+
+
+# create empty placeholder text label for generated password
+password_label = tkinter.Label(top, text=" ")
+password_label.pack()
 
 
 def generate_password(requirements):
@@ -43,6 +107,17 @@ def generate_password(requirements):
         password = password + valid_characters[pos]
         valid_characters.pop(pos)
     print(password)
+
+    # fill password label placeholder with actual password
+    password_label.config(text=password)
+
+    copied_label.config(text="Password copied to clipboard!")
+
+
+    # clear the clipboard
+    top.clipboard_clear()
+    # copy generated password to clipboard
+    top.clipboard_append(password)
 
     return password
 
@@ -106,5 +181,10 @@ def output_password(password):
     fo.close()
 
 
-if __name__ == '__main__':
-    password_generator('PyCharm')
+top.mainloop()
+
+
+
+
+
+
