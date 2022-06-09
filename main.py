@@ -3,6 +3,9 @@ import random
 import tkinter
 
 
+
+
+
 # start of tkinter
 
 
@@ -47,6 +50,15 @@ caps_entry = tkinter.Entry(top)
 caps_entry.pack()
 caps_entry.insert(0, 2)
 
+# variable that tracks the state of the checkbox
+ambiguous_Checkvar = tkinter.IntVar()
+
+# create Checkbutton for ambiguous characters
+ambiguous_Checkbox = tkinter.Checkbutton(top, text = "Remove ambiguous characters?", variable = ambiguous_Checkvar, \
+                                         onvalue = 1, offvalue = 0)
+
+ambiguous_Checkbox.pack()
+
 def password_generator():
     requirements = get_user_input()
     password = generate_password(requirements)
@@ -88,11 +100,22 @@ def generate_password(requirements):
     # create the list of usable characters for the password
     alphabet = string.ascii_letters
     lower_case = string.ascii_lowercase
+    non_amb_lowers = lower_case.replace('l', '')
     upper_case = string.ascii_uppercase
+    non_amb_upper = upper_case.replace('I', '').replace('O', '')
     digits = list(range(0, 10))
+    non_amb_digits = list(range(2, 10))
+
     # cast the digits as str so they can be concatenated to the password
     digit_string = [str(int) for int in digits]
+    non_amb_digit_string = [str(int) for int in non_amb_digits]
     symbol_list = ['!', '@', '#', '$', '%', '^', '&', '*']
+
+    # if the remove ambiguous checkbox has been selected use the non-ambiguous character sets
+    if ambiguous_Checkvar.get() == 1:
+        lower_case = non_amb_lowers
+        upper_case = non_amb_upper
+        digit_string = non_amb_digit_string
 
     # generate the characters that will be used in the password
     valid_characters = get_lowercase(requirements[4], lower_case) + get_uppercase(requirements[3], upper_case) + \
